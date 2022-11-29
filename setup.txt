@@ -1,0 +1,28 @@
+download node and npm
+
+cd <project-dir>
+npm init
+npm install express
+npm install eslint --save-dev
+npm i cors
+npm i dotenv
+npm i mysql2
+
+npm run-script lint
+# OR (using the alias)
+npm run lint
+
+# to run and connect to database
+node server_mysql
+
+#e.g to call the server 
+# get http://localhost:4000/order/v1.0.0/order/menucategory
+
+install mysql from https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/windows-installation.html
+install mysql workbench
+
+CREATE TABLE testdb.menuCategories (
+    id int NOT NULL AUTO_INCREMENT,
+    category varchar(255) NOT NULL UNIQUE,
+    PRIMARY KEY (id)
+);
