@@ -43,7 +43,10 @@ Order.create = (newOrder, result) => {
               //Failure
             });
           } else {
-            if (!newOrder.orderDetailList) {
+            if (
+              !newOrder.orderDetailList ||
+              newOrder.orderDetailList.length === 0
+            ) {
               conn.commit(function (err) {
                 if (err) {
                   conn.rollback(function () {
@@ -65,8 +68,8 @@ Order.create = (newOrder, result) => {
                   });
                   //Success
                 }
-                return;
               });
+              return;
             }
 
             conn.query(
