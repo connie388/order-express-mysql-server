@@ -7,7 +7,6 @@ const Productline = function (productline) {
   this.imageUrl = productline.imageUrl;
 };
 Productline.create = (newProductline, result) => {
-  console.log(newProductline);
   conn.query("INSERT INTO productlines SET ?", newProductline, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -62,7 +61,7 @@ Productline.updateById = (productLine, productline, result) => {
     (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
+        result(err, null);
         return;
       }
 
@@ -87,7 +86,7 @@ Productline.remove = (productLine, result) => {
     (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
+        result(err, null);
         return;
       }
 

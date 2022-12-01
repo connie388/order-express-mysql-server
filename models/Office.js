@@ -68,7 +68,7 @@ Office.updateById = (officeCode, office, result) => {
     (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
+        result(err, null);
         return;
       }
 
@@ -90,7 +90,7 @@ Office.remove = (officeCode, result) => {
     (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
+        result(err, null);
         return;
       }
 

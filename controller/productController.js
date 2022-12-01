@@ -50,7 +50,6 @@ exports.findAll = (req, res) => {
 };
 
 exports.findByProductLine = (req, res) => {
-  console.log("test=" + req.params.productLine);
   ProductModel.findByProductLine(req.params.productLine, (err, product) => {
     if (err) {
       if (err.kind === "not_found") {

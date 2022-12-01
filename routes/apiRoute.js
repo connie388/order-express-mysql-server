@@ -6,17 +6,17 @@ var router = express.Router();
 var office_controller = require("../controller/officeController");
 var productline_controller = require("../controller/productlineController");
 // var employee_controller = require("../controller/employeeController");
-// var customer_controller = require("../controller/customerController");
+var customer_controller = require("../controller/customerController");
 var product_controller = require("../controller/productController");
 // var payment_controller = require("../controller/paymentController");
-// var order_controller = require("../controller/orderController");
+var order_controller = require("../controller/orderController");
 
-// router.get("/customer", customer_controller.findAll);
-// router.get("/customer/:id", customer_controller.findById);
-// router.get("/customer/firstNameLike", customer_controller.findByFirstNameLike);
-// router.post("/customer", customer_controller.create);
-// router.put("/customer/:id", customer_controller.update);
-// router.delete("/customer/:id", customer_controller.deleteById);
+router.get("/customer", customer_controller.findAll);
+router.get("/customer/:customerNumber", customer_controller.findById);
+router.get("/customer/firstNameLike", customer_controller.findByFirstNameLike);
+router.post("/customer", customer_controller.create);
+router.put("/customer/:customerNumber", customer_controller.update);
+router.delete("/customer/:customerNumber", customer_controller.deleteById);
 
 router.get("/office", office_controller.findAll);
 router.get("/office/:officeCode", office_controller.findById);
@@ -53,16 +53,15 @@ router.delete("/product/:productCode", product_controller.deleteById);
 //   payment_controller.deleteById
 // );
 
-// router.get("/order", order_controller.findAll);
-// router.get("/order/:orderNumber", order_controller.findById);
-// router.get("/order/status/:status", order_controller.findByStatus);
-// router.get("/order/:fromDate/:toDate", order_controller.findByOrderDate);
-// router.get(
-//   "/:customerNumber/order",
-//   order_controller.findByCustomerNoAndOrderDate
-// );
-// router.get("/order/customer", order_controller.findByCustomerLike);
-// router.post("/order", order_controller.create);
-// router.put("/order/:orderNumber", order_controller.update);
+router.get("/order", order_controller.findAll);
+router.get("/order/:orderNumber", order_controller.findById);
+router.get("/order/status/:status", order_controller.findByStatus);
+router.get("/order/:fromDate/:toDate", order_controller.findByOrderDate);
+router.get(
+  "/order-customer",
+  order_controller.findByCustomerNameLikeAndOrderDate
+);
+router.post("/order", order_controller.create);
+router.put("/order/:orderNumber", order_controller.update);
 
 module.exports = router;
