@@ -8,7 +8,7 @@ var productline_controller = require("../controller/productlineController");
 // var employee_controller = require("../controller/employeeController");
 var customer_controller = require("../controller/customerController");
 var product_controller = require("../controller/productController");
-// var payment_controller = require("../controller/paymentController");
+var payment_controller = require("../controller/paymentController");
 var order_controller = require("../controller/orderController");
 
 router.get("/customer", customer_controller.findAll);
@@ -44,14 +44,14 @@ router.post("/product", product_controller.create);
 router.put("/product/:productCode", product_controller.update);
 router.delete("/product/:productCode", product_controller.deleteById);
 
-// router.get("/payment", payment_controller.findAll);
-// router.get("/:customerNumber/payment", payment_controller.findByCustomerNumber);
-// router.post("/payment", payment_controller.create);
-// router.put("/payment/:customerNumber/:checkNumber", payment_controller.update);
-// router.delete(
-//   "/payment/:customerNumber/:checkNumber",
-//   payment_controller.deleteById
-// );
+router.get("/payment", payment_controller.findAll);
+router.get("/:customerNumber/payment", payment_controller.findByCustomerNumber);
+router.post("/payment", payment_controller.create);
+router.put("/payment/:customerNumber/:checkNumber", payment_controller.update);
+router.delete(
+  "/payment/:customerNumber/:checkNumber",
+  payment_controller.deleteById
+);
 
 router.get("/order", order_controller.findAll);
 router.get("/order/:orderNumber", order_controller.findById);
