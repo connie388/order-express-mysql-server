@@ -233,29 +233,6 @@ Order.findAll = (result) => {
   });
 };
 Order.updateById = (orderNumber, order, result) => {
-  // conn.query(
-  //   "UPDATE orders SET ? WHERE orderNumber = ?",
-  //   [order, orderNumber],
-  //   (err, res) => {
-  //     if (err) {
-  //       console.log("error: ", err);
-  //       result(err, null);
-  //       return;
-  //     }
-
-  //     if (res.affectedRows == 0) {
-  //       // not found order
-  //       result({ kind: "not_found" }, null);
-  //       return;
-  //     }
-
-  //     console.log("updated orders: ", {
-  //       orderNumber: orderNumber,
-  //       ...order,
-  //     });
-  //     result(null, { orderNumber: orderNumber, ...order });
-  //   };
-
   conn.beginTransaction(function (err) {
     if (err) {
       //Transaction Error (Rollback and release connection)
@@ -293,7 +270,7 @@ Order.updateById = (orderNumber, order, result) => {
               return;
             }
 
-            if (!order.orderDetailList) {
+            if (!order.orderDetailList || order.orderDetailList.length === 0) {
               conn.commit(function (err) {
                 if (err) {
                   conn.rollback(function () {
@@ -310,11 +287,12 @@ Order.updateById = (orderNumber, order, result) => {
                   result(null, {
                     orderNumber: orderNumber,
                     ...order,
+                    orderDetailList: [],
                   });
                   //Success
                 }
-                return;
               });
+              return;
             }
 
             const sql = `INSERT INTO orderdetails (orderNumber, productCode, quantityOrdered, priceEach, orderLineNumber)
