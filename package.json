@@ -4,14 +4,19 @@
   "description": "",
   "main": "helper.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./server_mysql",
+    "devstart": "nodemon ./server_mysql",
+    "serverstart": "DEBUG=order-express-mysql-server:* npm run devstart"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
+    "debug": "^4.3.4",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "helmet": "^6.0.1",
     "mysql2": "^2.3.3"
   },
   "devDependencies": {

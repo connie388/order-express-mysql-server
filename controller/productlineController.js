@@ -1,5 +1,5 @@
 const ProductlineModel = require("../models/Productline");
-
+const debug = require("debug")("productline");
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -19,14 +19,15 @@ exports.create = (req, res) => {
 
   // Save record in the database
   ProductlineModel.create(productline, (err, data) => {
-    if (err)
+    if (err) {
+      debug(`create error: ${err}`);
       res.status(500).json({
         success: false,
         message:
           err.message ||
           "Some error occurred while creating the productline record.",
       });
-    else res.status(200).json({ success: true, data });
+    } else res.status(200).json({ success: true, data });
   });
 };
 

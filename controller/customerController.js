@@ -1,5 +1,5 @@
 const CustomerModel = require("../models/Customer");
-
+const debug = require("debug")("customer");
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -28,28 +28,30 @@ exports.create = (req, res) => {
 
   // Save record in the database
   CustomerModel.create(customer, (err, data) => {
-    if (err)
+    if (err) {
       res.status(500).json({
         success: false,
         message:
           err.message ||
           "Some error occurred while creating the customer record.",
       });
-    else res.status(200).json(data);
+      debug(`create error: ${err}`);
+    } else res.status(200).json(data);
   });
 };
 
 // Retrieve all from the database.
 exports.findAll = (req, res) => {
   CustomerModel.findAll(req.query?.name, (err, customer) => {
-    if (err)
+    if (err) {
       res.status(500).send({
         success: false,
         message:
           err.message ||
           "Some error occurred while retrieving customer records.",
       });
-    else res.status(200).json(customer);
+      debug(`find all error: ${err}`);
+    } else res.status(200).json(customer);
   });
 };
 
@@ -69,6 +71,7 @@ exports.findByFirstNameLike = (req, res) => {
             "Some error occurred while retrieving the customer records with first name like " +
               req.query.name,
         });
+        debug(`findByFirstNameLike error: ${err}`);
       }
     } else res.status(200).json(customer);
   });
@@ -121,6 +124,7 @@ exports.update = (req, res) => {
             message:
               "Error updating customer with " + req.params.customerNumber,
           });
+          debug(`findById error: ${err}`);
         }
       } else {
         res.status(200).json({
@@ -149,6 +153,7 @@ exports.deleteById = (req, res) => {
             err.message ||
             "Could not delete customer " + req.params.customerNumber,
         });
+        debug(`deleteById error: ${err}`);
       }
     } else
       res.status(200).json({

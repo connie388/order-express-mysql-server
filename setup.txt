@@ -26,3 +26,5 @@ CREATE TABLE testdb.menuCategories (
     category varchar(255) NOT NULL UNIQUE,
     PRIMARY KEY (id)
 );
+
+
