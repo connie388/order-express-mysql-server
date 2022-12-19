@@ -1,21 +1,22 @@
 const mysql = require("mysql2");
-const dbConfig = require("../config/db.mysql.js");
 
-const pool = mysql.createPool({
-  connectionLimit: 10,
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DB,
-});
+require("dotenv").config({ path: "./.env" });
+const dbUsername = process.env.DB_USERNAME;
+const dbPassword = process.env.DB_PASSWORD;
 
+if (!dbUsername) {
+  throw new Error("DB_USERNAME environment variables must be set");
+}
 
+if (!dbPassword) {
+  throw new Error("DB_PASSWORD environment variables must be set");
+}
 // Create a connection to the database
 const connection = mysql.createConnection({
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DB,
+  host: process.env.HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB,
   multipleStatements: true,
 });
 

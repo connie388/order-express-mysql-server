@@ -1,5 +1,4 @@
 const conn = require("./connection");
-// const pool = require("./connection");
 
 const Order = function (order) {
   // this.orderNumber = order.orderNumber;
