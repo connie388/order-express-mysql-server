@@ -14,7 +14,11 @@ app.use(helmet()); // Use Helmet to protect against well known vulnerabilities
 app.use(cors());
 // Curb Cores Error by adding a header here
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "*"
+    // "https://connie388.github.io/order-vue/"
+  );
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
