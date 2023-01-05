@@ -14,7 +14,7 @@ if (!dbPassword) {
 // Create a connection to the database
 const connection = mysql.createConnection({
   connectionLimit: 100,
-  host: process.env.HOST,
+  host: process.env.HOST + ":" + process.env.PORT,
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB,
