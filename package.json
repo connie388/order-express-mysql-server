@@ -2,7 +2,7 @@
   "name": "express-mysql-server",
   "version": "1.0.0",
   "description": "",
-  "main": "helper.js",
+  "main": "server_mysql.js",
   "engines": {
     "node": "16.16.0"
   },
