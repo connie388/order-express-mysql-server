@@ -21,7 +21,7 @@ exports.create = (req, res) => {
     orderDetailList: req.body.orderDetailList,
   });
 
-  console.log("order=" + JSON.stringify(order));
+  // console.log("order=" + JSON.stringify(order));
 
   // Save record in the database
   OrderModel.create(order, (err, data) => {
@@ -115,7 +115,7 @@ exports.findByOrderDate = (req, res) => {
 };
 
 exports.findByCustomerNameLikeAndOrderDate = (req, res) => {
-  console.log("test");
+  // console.log("test");
   OrderModel.findByCustomerNameLikeAndOrderDate(
     req.query?.customerNameLike,
     req.query?.fromDate,

@@ -2,7 +2,9 @@ let express = require("express");
 let cors = require("cors");
 const createError = require("http-errors");
 const apiRoute = require("./routes/apiRoute");
-require("dotenv").config({ path: "./.env" });
+if (process.env.NODE_ENV.trim() !== "production") {
+  require("dotenv").config({ path: "./.env" });
+}
 const compression = require("compression");
 const helmet = require("helmet");
 const path = require("path");
@@ -11,7 +13,21 @@ const app = express();
 app.use(compression()); // Compress all routes
 app.use(helmet()); // Use Helmet to protect against well known vulnerabilities
 
-app.use(cors());
+var whiteList = [
+  process.env.CLIENT_URL || "http://localhost:8081",
+  "http://localhost:8081",
+];
+var corsOptionsDelegate = function (req, callback) {
+  var corsOptions;
+  if (whiteList.indexOf(req.header("Origin")) !== -1) {
+    corsOptions = { origin: true };
+  } else {
+    corsOptions = { origin: false };
+  }
+  callback(null, corsOptions);
+};
+app.use(cors(corsOptionsDelegate));
+// app.use(cors());
 // Curb Cores Error by adding a header here
 app.use((req, res, next) => {
   res.setHeader(

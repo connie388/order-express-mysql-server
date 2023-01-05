@@ -17,18 +17,18 @@ const Customer = function (customer) {
 };
 
 Customer.create = (newCustomer, result) => {
-  console.log(newCustomer);
+  // console.log(newCustomer);
   conn.query("INSERT INTO customers SET ?", newCustomer, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      // console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created customer record: ", {
-      customerNumber: res.customerNumber,
-      ...newCustomer,
-    });
+    // console.log("created customer record: ", {
+    //   customerNumber: res.customerNumber,
+    //   ...newCustomer,
+    // });
     result(null, { customerNumber: res.customerNumber, ...newCustomer });
   });
 };
@@ -37,13 +37,13 @@ Customer.findById = (customerNumber, result) => {
     `SELECT * FROM customers WHERE customerNumber = "${customerNumber}"`,
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
 
       if (res.length) {
-        console.log("found customer : ", res[0]);
+        // console.log("found customer : ", res[0]);
         result(null, res[0]);
         return;
       }
@@ -58,13 +58,13 @@ Customer.findByFirstNameLike = (name, result) => {
     `SELECT * FROM customers WHERE contactFirstName like "%${name}%"`,
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
 
       if (res.length) {
-        console.log("found customer: ", res);
+        // console.log("found customer: ", res);
         result(null, res);
         return;
       }
@@ -80,12 +80,12 @@ Customer.findAll = (name, result) => {
 
   conn.query(sqlStatement, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      // console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("customers: ", res);
+    // console.log("customers: ", res);
     result(null, res);
   });
 };
@@ -95,7 +95,7 @@ Customer.updateById = (customerNumber, customer, result) => {
     [customer, customerNumber],
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
@@ -106,7 +106,7 @@ Customer.updateById = (customerNumber, customer, result) => {
         return;
       }
 
-      console.log("updated customers: ", {
+      // console.log("updated customers: ", {
         customerNumber: customerNumber,
         ...customer,
       });
@@ -120,7 +120,7 @@ Customer.remove = (customerNumber, result) => {
     customerNumber,
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
@@ -131,7 +131,7 @@ Customer.remove = (customerNumber, result) => {
         return;
       }
 
-      console.log("deleted customers with customer number: ", customerNumber);
+      // console.log("deleted customers with customer number: ", customerNumber);
       result(null, res);
     }
   );

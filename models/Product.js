@@ -13,18 +13,18 @@ const Product = function (product) {
 };
 
 Product.create = (newProduct, result) => {
-  console.log(newProduct);
+  // console.log(newProduct);
   conn.query("INSERT INTO products SET ?", newProduct, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      // console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created product record: ", {
-      productCode: res.productCode,
-      ...newProduct,
-    });
+    // console.log("created product record: ", {
+    //   productCode: res.productCode,
+    //   ...newProduct,
+    // });
     result(null, { productCode: res.productCode, ...newProduct });
   });
 };
@@ -33,13 +33,13 @@ Product.findById = (productCode, result) => {
     `SELECT * FROM products WHERE productCode = "${productCode}"`,
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
 
       if (res.length) {
-        console.log("found product : ", res[0]);
+        // console.log("found product : ", res[0]);
         result(null, res[0]);
         return;
       }
@@ -54,13 +54,13 @@ Product.findByProductLine = (productLine, result) => {
     `SELECT * FROM products WHERE productLine = "${productLine}"`,
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
 
       if (res.length) {
-        console.log("found product : ", res);
+        // console.log("found product : ", res);
         result(null, res);
         return;
       }
@@ -73,12 +73,12 @@ Product.findByProductLine = (productLine, result) => {
 Product.findAll = (result) => {
   conn.query(`SELECT * FROM products `, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      // console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("products: ", res);
+    // console.log("products: ", res);
     result(null, res);
   });
 };
@@ -88,7 +88,7 @@ Product.updateById = (productCode, product, result) => {
     [product, productCode],
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
@@ -99,10 +99,10 @@ Product.updateById = (productCode, product, result) => {
         return;
       }
 
-      console.log("updated products: ", {
-        productCode: productCode,
-        ...product,
-      });
+      // console.log("updated products: ", {
+      //   productCode: productCode,
+      //   ...product,
+      // });
       result(null, { productCode: productCode, ...product });
     }
   );
@@ -113,7 +113,7 @@ Product.remove = (productCode, result) => {
     productCode,
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
@@ -124,7 +124,7 @@ Product.remove = (productCode, result) => {
         return;
       }
 
-      console.log("deleted products with product code: ", productCode);
+      // console.log("deleted products with product code: ", productCode);
       result(null, res);
     }
   );

@@ -107,7 +107,7 @@ exports.update = (req, res) => {
       .send({ success: false, message: "Data to update can not be empty!" });
   }
 
-  console.log("test = " + req.params.customerNumber);
+  // console.log("test = " + req.params.customerNumber);
   CustomerModel.updateById(
     req.params.customerNumber,
     new CustomerModel(req.body),
