@@ -107,9 +107,9 @@ Customer.updateById = (customerNumber, customer, result) => {
       }
 
       // console.log("updated customers: ", {
-        customerNumber: customerNumber,
-        ...customer,
-      });
+      //   customerNumber: customerNumber,
+      //   ...customer,
+      // });
       result(null, { customerNumber: customerNumber, ...customer });
     }
   );
