@@ -8,17 +8,17 @@ const Payment = function (payment) {
 };
 
 Payment.create = (newPayment, result) => {
-  console.log(newPayment);
+  // console.log(newPayment);
   conn.query("INSERT INTO payments SET ?", newPayment, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      // console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created payment record: ", {
-      ...newPayment,
-    });
+    // console.log("created payment record: ", {
+    //   ...newPayment,
+    // });
     result(null, { customerNumber: res.customerNumber, ...newPayment });
   });
 };
@@ -27,13 +27,13 @@ Payment.findByCustomerNumber = (customerNumber, result) => {
     `SELECT * FROM payments WHERE customerNumber = "${customerNumber}"`,
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
 
       if (res.length) {
-        console.log("found payment : ", res);
+        // console.log("found payment : ", res);
         result(null, res);
         return;
       }
@@ -47,12 +47,12 @@ Payment.findByCustomerNumber = (customerNumber, result) => {
 Payment.findAll = (result) => {
   conn.query(`SELECT * FROM payments `, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      // console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("payments: ", res);
+    // console.log("payments: ", res);
     result(null, res);
   });
 };
@@ -62,7 +62,7 @@ Payment.updateById = (customerNumber, checkNumber, payment, result) => {
     [payment, customerNumber, checkNumber],
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
@@ -73,11 +73,11 @@ Payment.updateById = (customerNumber, checkNumber, payment, result) => {
         return;
       }
 
-      console.log("updated payments: ", {
-        customerNumber: customerNumber,
-        checkNumber: checkNumber,
-        ...payment,
-      });
+      // console.log("updated payments: ", {
+      //   customerNumber: customerNumber,
+      //   checkNumber: checkNumber,
+      //   ...payment,
+      // });
       result(null, {
         customerNumber: customerNumber,
         checkNumber: checkNumber,
@@ -92,7 +92,7 @@ Payment.remove = (customerNumber, checkNumber, result) => {
     [customerNumber, checkNumber],
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
@@ -103,12 +103,12 @@ Payment.remove = (customerNumber, checkNumber, result) => {
         return;
       }
 
-      console.log(
-        "deleted payments with customer number: " +
-          customerNumber +
-          " and check number: " +
-          checkNumber
-      );
+      // console.log(
+      //   "deleted payments with customer number: " +
+      //     customerNumber +
+      //     " and check number: " +
+      //     checkNumber
+      // );
       result(null, res);
     }
   );

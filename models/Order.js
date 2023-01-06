@@ -16,7 +16,7 @@ Order.create = (newOrder, result) => {
     if (err) {
       //Transaction Error (Rollback and release connection)
       conn.rollback(function () {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
         //Failure
@@ -49,17 +49,17 @@ Order.create = (newOrder, result) => {
               conn.commit(function (err) {
                 if (err) {
                   conn.rollback(function () {
-                    console.log("error: ", err);
+                    // console.log("error: ", err);
                     result(err, null);
                     return;
                     //Failure
                   });
                 } else {
-                  console.log("created order record: ", {
-                    orderNumber: insertResult.insertId,
-                    ...newOrder,
-                    orderDetailList: [],
-                  });
+                  // console.log("created order record: ", {
+                  //   orderNumber: insertResult.insertId,
+                  //   ...newOrder,
+                  //   orderDetailList: [],
+                  // });
                   result(null, {
                     orderNumber: insertResult.insertId,
                     ...newOrder,
@@ -86,7 +86,7 @@ Order.create = (newOrder, result) => {
                 if (err) {
                   //Query Error (Rollback and release connection)
                   conn.rollback(function () {
-                    console.log("error: ", err);
+                    // console.log("error: ", err);
                     result(err, null);
                     return;
                     //Failure
@@ -95,17 +95,17 @@ Order.create = (newOrder, result) => {
                   conn.commit(function (err) {
                     if (err) {
                       conn.rollback(function () {
-                        console.log("error: ", err);
+                        // console.log("error: ", err);
                         result(err, null);
                         return;
                         //Failure
                       });
                     } else {
-                      console.log("created order record: ", {
-                        orderNumber: insertResult.insertId,
-                        ...newOrder,
-                        orderDetailList: newOrder.orderDetailList,
-                      });
+                      // console.log("created order record: ", {
+                      //   orderNumber: insertResult.insertId,
+                      //   ...newOrder,
+                      //   orderDetailList: newOrder.orderDetailList,
+                      // });
                       result(null, {
                         orderNumber: insertResult.insertId,
                         ...newOrder,
@@ -130,13 +130,13 @@ Order.findById = (orderNumber, result) => {
     `,
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
 
       if (res.length) {
-        console.log("found order : ", res);
+        // console.log("found order : ", res);
 
         result(null, { order: res[0], orderDetailList: res[1] });
         return;
@@ -162,13 +162,13 @@ Order.findByCustomerNameLikeAndOrderDate = (
   if (toDate) queryStatement += ` AND o.orderDate <= "${toDate}" `;
   conn.query(queryStatement, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      // console.log("error: ", err);
       result(err, null);
       return;
     }
 
     if (res.length) {
-      console.log("found order : ", res);
+      // console.log("found order : ", res);
       result(null, res);
       return;
     }
@@ -183,13 +183,13 @@ Order.findByOrderDate = (fromDate, toDate, result) => {
     `SELECT o FROM orders o WHERE (${fromDate} IS NULL OR o.orderDate >= "${fromDate}") AND (${toDate} IS NULL OR o.orderDate <= "${toDate}")`,
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
       }
 
       if (res.length) {
-        console.log("found order : ", res);
+        // console.log("found order : ", res);
         result(null, res);
         return;
       }
@@ -203,13 +203,13 @@ Order.findByOrderDate = (fromDate, toDate, result) => {
 Order.findByStatus = (status, result) => {
   conn.query(`SELECT * FROM orders WHERE status = "${status}"`, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      // console.log("error: ", err);
       result(err, null);
       return;
     }
 
     if (res.length) {
-      console.log("found order : ", res);
+      // console.log("found order : ", res);
       result(null, res);
       return;
     }
@@ -222,12 +222,12 @@ Order.findByStatus = (status, result) => {
 Order.findAll = (result) => {
   conn.query(`SELECT * FROM orders `, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      // console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("orders: ", res);
+    // console.log("orders: ", res);
     result(null, res);
   });
 };
@@ -236,7 +236,7 @@ Order.updateById = (orderNumber, order, result) => {
     if (err) {
       //Transaction Error (Rollback and release connection)
       conn.rollback(function () {
-        console.log("error: ", err);
+        // console.log("error: ", err);
         result(err, null);
         return;
         //Failure
@@ -257,7 +257,7 @@ Order.updateById = (orderNumber, order, result) => {
           if (err) {
             //Query Error (Rollback)
             conn.rollback(function () {
-              console.log("error: ", err);
+              // console.log("error: ", err);
               result(err, null);
               return;
               //Failure
@@ -273,16 +273,16 @@ Order.updateById = (orderNumber, order, result) => {
               conn.commit(function (err) {
                 if (err) {
                   conn.rollback(function () {
-                    console.log("error: ", err);
+                    // console.log("error: ", err);
                     result(err, null);
                     return;
                     //Failure
                   });
                 } else {
-                  console.log("update order record: ", {
-                    orderNumber: orderNumber,
-                    ...order,
-                  });
+                  // console.log("update order record: ", {
+                  //   orderNumber: orderNumber,
+                  //   ...order,
+                  // });
                   result(null, {
                     orderNumber: orderNumber,
                     ...order,
@@ -318,7 +318,7 @@ orderLineNumber = values(orderLineNumber)`;
                 if (err) {
                   //Query Error (Rollback)
                   conn.rollback(function () {
-                    console.log("error: ", err);
+                    // console.log("error: ", err);
                     result(err, null);
                     return;
                     //Failure
@@ -327,16 +327,16 @@ orderLineNumber = values(orderLineNumber)`;
                   conn.commit(function (err) {
                     if (err) {
                       conn.rollback(function () {
-                        console.log("error: ", err);
+                        // console.log("error: ", err);
                         result(err, null);
                         return;
                         //Failure
                       });
                     } else {
-                      console.log("update order record: ", {
-                        orderNumber: orderNumber,
-                        ...order,
-                      });
+                      // console.log("update order record: ", {
+                      //   orderNumber: orderNumber,
+                      //   ...order,
+                      // });
                       result(null, {
                         orderNumber: orderNumber,
                         ...order,

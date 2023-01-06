@@ -1,4 +1,4 @@
-const OrderModel = require("../models/Order.js");
+const OrderModel = require("../models/Order");
 
 exports.create = (req, res) => {
   // Validate request
