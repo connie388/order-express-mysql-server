@@ -53,15 +53,15 @@ router.delete(
   payment_controller.deleteById
 );
 
-router.get("/order", order_controller.findAll);
-router.get("/order/:orderNumber", order_controller.findById);
-router.get("/order/status/:status", order_controller.findByStatus);
-router.get("/order/:fromDate/:toDate", order_controller.findByOrderDate);
-router.get(
-  "/order-customer",
-  order_controller.findByCustomerNameLikeAndOrderDate
-);
-router.post("/order", order_controller.create);
-router.put("/order/:orderNumber", order_controller.update);
+// router.get("/order", order_controller.findAll);
+// router.get("/order/:orderNumber", order_controller.findById);
+// router.get("/order/status/:status", order_controller.findByStatus);
+// router.get("/order/:fromDate/:toDate", order_controller.findByOrderDate);
+// router.get(
+//   "/order-customer",
+//   order_controller.findByCustomerNameLikeAndOrderDate
+// );
+// router.post("/order", order_controller.create);
+// router.put("/order/:orderNumber", order_controller.update);
 
 module.exports = router;
