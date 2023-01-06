@@ -9,7 +9,7 @@ var productline_controller = require("../controller/productlineController");
 var customer_controller = require("../controller/customerController");
 var product_controller = require("../controller/productController");
 var payment_controller = require("../controller/paymentController");
-var order_controller = require("../controller/orderController");
+// var order_controller = require("../controller/orderController");
 
 router.get("/customer", customer_controller.findAll);
 router.get("/customer/:customerNumber", customer_controller.findById);
